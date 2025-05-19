@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lycée Excellence - Béjaïa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .hero-image {
+            background-image: linear-gradient(rgba(2, 132, 199, 0.7), rgba(6, 95, 150, 0.7)), url('ChatGPT Image 1 mai 2025, 12_59_13.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .back-to-top {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .card-hover:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .theme-toggle {
+            transition: transform 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+        
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+        
+main {
+    text-align: center;
+    padding: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+background-color: #d6eeee;
+}
+    </style>
+</head>
+<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-50 shadow-sm">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold mr-3">LE</div>
+                        <span class="text-xl font-bold text-primary-600 dark:text-primary-400">Lycée Excellence</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Home</a>
+                    <a href="#about" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">About Us</a>
+                    <a href="#programs" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Academic Programs</a>
+                    <a href="#projects" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Projects</a>
+                    <a href="#news" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">News</a>
+                    <a href="#teachers" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Teachers</a>
+                    <a href="#contact" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Contact</a>
+                    
+                    <button id="theme-toggle" class="theme-toggle p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:inline"></i>
+                    </button>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="mobile-menu md:hidden">
+                <div class="pt-4 pb-2 space-y-2">
+                    <a href="#home" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
+                    <a href="#about" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">About Us</a>
+                    <a href="#programs" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Academic Programs</a>
+                    <a href="#projects" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Projects</a>
+                    <a href="#news" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">News</a>
+                    <a href="#teachers" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Teachers</a>
+                    <a href="#contact" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Contact</a>
+                    
+                    <div class="px-3 py-2">
+                        <button id="theme-toggle-mobile" class="theme-toggle p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
+                            <i class="fas fa-moon dark:hidden"></i>
+                            <i class="fas fa-sun hidden dark:inline"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-image min-h-screen flex items-center justify-center text-white pt-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto animate-on-scroll" data-delay="0">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">Welcome to Lycée Excellence</h1>
+                <p class="text-xl md:text-2xl mb-8 animate-fade-in" style="animation-delay: 0.2s;">Shaping the future of education in Béjaïa, Algeria</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in" style="animation-delay: 0.4s;">
+                    <a href="#about" class="bg-white text-primary-600 hover:bg-gray-100 px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105">
+                        Learn More
+                    </a>
+                    <a href="#contact" class="bg-transparent border-2 border-white hover:bg-white/10 px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 animate-on-scroll">About Our School</h2>
+                <div class="w-20 h-1 bg-primary-600 mx-auto mb-6 animate-on-scroll" data-delay="100"></div>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 animate-on-scroll" data-delay="200">
+                    Founded in 1985, Lycée Excellence has been a cornerstone of quality education in Béjaïa, fostering academic excellence and personal growth for generations of students.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md transition-all duration-300 card-hover animate-on-scroll" data-delay="300">
+                    <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-graduation-cap text-primary-600 dark:text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">Our Mission</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        To provide a transformative educational experience that prepares students for success in higher education and beyond.
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md transition-all duration-300 card-hover animate-on-scroll" data-delay="400">
+                    <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-eye text-primary-600 dark:text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">Our Vision</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        To be recognized as a leading institution that nurtures innovation, critical thinking, and responsible citizenship.
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md transition-all duration-300 card-hover animate-on-scroll" data-delay="500">
+                    <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-star text-primary-600 dark:text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">Our Values</h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Excellence, Integrity, Respect, Diversity, and Lifelong Learning guide everything we do.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academic Programs -->
+    <section id="programs" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 animate-on-scroll">Academic Programs</h2>
+                <div class="w-20 h-1 bg-primary-600 mx-auto mb-6 animate-on-scroll" data-delay="100"></div>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 animate-on-scroll" data-delay="200">
+                    We offer a comprehensive curriculum designed to challenge and inspire students at every level.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md transition-all duration-300 card-hover animate-on-scroll" data-delay="300">
+                    <div class="h-48 bg-primary-500 flex items-center justify-center">
+                        <i class="fas fa-flask text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Science Stream</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Our science program prepares students for careers in medicine, engineering, and scientific research.
+                        </p>
+                        <a href="#" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Learn more →</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md transition-all duration-300 card-hover animate-on-scroll" data-delay="400">
+                    <div class="h-48 bg-primary-500 flex items-center justify-center">
+                        <i class="fas fa-calculator text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Mathematics Stream</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Advanced mathematics curriculum for students pursuing careers in STEM fields.
+                        </p>
+                        <a href="#" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Learn more →</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md transition-all duration-300 card-hover animate-on-scroll" data-delay="500">
+                    <div class="h-48 bg-primary-500 flex items-center justify-center">
+                        <i class="fas fa-language text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Languages & Literature</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Comprehensive language studies in Arabic, French, English, and Tamazight.
+                        </p>
+                        <a href="#" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Learn more →</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md transition-all duration-300 card-hover animate-on-scroll" data-delay="600">
+                    <div class="h-48 bg-primary-500 flex items-center justify-center">
+                        <i class="fas fa-laptop-code text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Technology & Computer Science</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Cutting-edge technology education preparing students for the digital age.
+                        </p>
+                        <a href="#" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Learn more →</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md transition-all duration-300 card-hover animate-on-scroll" data-delay="700">
+                    <div class="h-48 bg-primary-500 flex items-center justify-center">
+                        <i class="fas fa-palette text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Arts & Humanities</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Creative programs in visual arts, music, and social sciences.
+                        </p>
+                        <a href="#" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Learn more →</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md transition-all duration-300 card-hover animate-on-scroll" data-delay="800">
+                    <div class="h-48 bg-primary-500 flex items-center justify-center">
+                        <i class="fas fa-running text-white text-5xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Sports & Athletics</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Competitive sports programs and physical education curriculum.
+                        </p>
+                        <a href="#" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Learn more →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 animate-on-scroll">Student Projects</h2>
+                <div class="w-20 h-1 bg-primary-600 mx-auto mb-6 animate-on-scroll" data-delay="100"></div>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 animate-on-scroll" data-delay="200">
+                    Our students regularly engage in innovative projects that demonstrate their creativity and problem-solving skills.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group relative overflow-hidden rounded-xl shadow-lg animate-on-scroll" data-delay="300">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+                         alt="Science Fair Project" 
+                         class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                        <div>
+                            <h3 class="text-white text-xl font-bold mb-2">Annual Science Fair</h3>
+                            <p class="text-gray-200">Students showcase innovative scientific research projects.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-xl shadow-lg animate-on-scroll" data-delay="400">
+                    <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+                         alt="Robotics Team" 
+                         class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                        <div>
+                            <h3 class="text-white text-xl font-bold mb-2">Robotics Team</h3>
+                            <p class="text-gray-200">Our award-winning robotics team competes nationally.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-xl shadow-lg animate-on-scroll" data-delay="500">
+                    <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+                         alt="Community Service" 
+                         class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                        <div>
+                            <h3 class="text-white text-xl font-bold mb-2">Community Service</h3>
+                            <p class="text-gray-200">Students engage in meaningful community projects.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-xl shadow-lg animate-on-scroll" data-delay="600">
+                    <img src="https://images.unsplash.com/photo-1542621334-a254cf47733d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Debate Club" 
+                         class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                        <div>
+                            <h3 class="text-white text-xl font-bold mb-2">Debate Club</h3>
+                            <p class="text-gray-200">Developing critical thinking and public speaking skills.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-xl shadow-lg animate-on-scroll" data-delay="700">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1522&q=80" 
+                         alt="Art Exhibition" 
+                         class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                        <div>
+                            <h3 class="text-white text-xl font-bold mb-2">Art Exhibition</h3>
+                            <p class="text-gray-200">Annual showcase of student artistic talent.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-xl shadow-lg animate-on-scroll" data-delay="800">
+                    <img src="https://images.unsplash.com/photo-1542621334-a254cf47733d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                         alt="Environmental Club" 
+                         class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                        <div>
+                            <h3 class="text-white text-xl font-bold mb-2">Environmental Club</h3>
+                            <p class="text-gray-200">Promoting sustainability and environmental awareness.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 animate-on-scroll">Latest News</h2>
+                <div class="w-20 h-1 bg-primary-600 mx-auto mb-6 animate-on-scroll" data-delay="100"></div>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 animate-on-scroll" data-delay="200">
+                    Stay updated with the latest happenings and achievements at Lycée Excellence.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md transition-all duration-300 card-hover animate-on-scroll" data-delay="300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" 
+                             alt="Graduation Ceremony" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                            <span>June 15, 2023</span>
+                            <span class="mx-2">•</span>
+                            <span>Events</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Annual Graduation Ceremony</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Celebrating the achievements of our graduating class of 2023 with a memorable ceremony.
+                        </p>
+                        <a href="#" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Read more →</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md transition-all duration-300 card-hover animate-on-scroll" data-delay="400">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884974?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Math Olympiad" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                            <span>May 28, 2023</span>
+                            <span class="mx-2">•</span>
+                            <span>Achievements</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Students Win National Math Olympiad</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Our math team secured first place in the national mathematics competition.
+                        </p>
+                        <a href="#" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Read more →</a>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md transition-all duration-300 card-hover animate-on-scroll" data-delay="500">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
+                             alt="New Library" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+                            <span>April 10, 2023</span>
+                            <span class="mx-2">•</span>
+                            <span>Facilities</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">New Digital Learning Center Opens</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            Our state-of-the-art digital learning center is now open to all students.
+                        </p>
+                        <a href="#" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Read more →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 animate-on-scroll" data-delay="600">
+                <a href="#" class="inline-block bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105">
+                    View All News
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 animate-on-scroll">Contact Us</h2>
+                <div class="w-20 h-1 bg-primary-600 mx-auto mb-6 animate-on-scroll" data-delay="100"></div>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 animate-on-scroll" data-delay="200">
+                    We'd love to hear from you. Reach out with any questions or to schedule a visit.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="animate-on-scroll" data-delay="300">
+                    <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md">
+                        <h3 class="text-2xl font-bold mb-6">Send Us a Message</h3>
+                        <form>
+                            <div class="mb-6">
+                                <label for="name" class="block text-gray-700 dark:text-gray-300 mb-2">Full Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800">
+                            </div>
+                            <div class="mb-6">
+                                <label for="email" class="block text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800">
+                            </div>
+                            <div class="mb-6">
+                                <label for="subject" class="block text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                                <input type="text" id="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll" data-delay="400">
+                    <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md h-full">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mr-4">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Address</h4>
+                                    <p class="text-gray-600 dark:text-gray-300">123 Education Street, Béjaïa 06000, Algeria</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mr-4">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Phone</h4>
+                                    <p class="text-gray-600 dark:text-gray-300">+213 34 12 34 56</p>
+                                    <p class="text-gray-600 dark:text-gray-300">+213 34 12 34 57</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mr-4">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Email</h4>
+                                    <p class="text-gray-600 dark:text-gray-300">contact@lycee-excellence.dz</p>
+                                    <p class="text-gray-600 dark:text-gray-300">admissions@lycee-excellence.dz</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mr-4">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Office Hours</h4>
+                                    <p class="text-gray-600 dark:text-gray-300">Sunday - Thursday: 8:00 AM - 4:00 PM</p>
+                                    <p class="text-gray-600 dark:text-gray-300">Friday - Saturday: Closed</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <div class="h-96 w-full animate-on-scroll" data-delay="500">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d102320.12039019035!2d5.003394!3d36.7538848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128da3e5a7a4f1d3%3A0x8dd3e5a5e5a5e5a5!2sB%C3%A9ja%C3%AFa!5e0!3m2!1sen!2sdz!4v1620000000000!5m2!1sen!2sdz" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy"
+                class="filter grayscale-[50%] hover:grayscale-0 transition-all duration-500"></iframe>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="animate-on-scroll" data-delay="300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold mr-3">LE</div>
+                        <span class="text-xl font-bold text-white">Lycée Excellence</span>
+                    </div>
+                    <p class="mb-4">
+                        Providing quality education in Béjaïa since 1985. Committed to excellence in academics, character development, and community service.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll" data-delay="400">
+                    <h3 class="text-white text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="hover:text-white transition-colors duration-300">Home</a></li>
+                        <li><a href="#about" class="hover:text-white transition-colors duration-300">About Us</a></li>
+                        <li><a href="#programs" class="hover:text-white transition-colors duration-300">Academic Programs</a></li>
+                        <li><a href="#projects" class="hover:text-white transition-colors duration-300">Student Projects</a></li>
+                        <li><a href="#news" class="hover:text-white transition-colors duration-300">News</a></li>
+                        <li><a href="#teachers" class="hover:text-white transition-colors duration-300">Teachers</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="animate-on-scroll" data-delay="500">
+                    <h3 class="text-white text-lg font-bold mb-4">Academic Programs</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Science Stream</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Mathematics Stream</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Languages & Literature</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Technology & Computer Science</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Arts & Humanities</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Sports & Athletics</a></li>
+                    </ul>
+                </div>
+                
+                <div class="animate-on-scroll" data-delay="600">
+                    <h3 class="text-white text-lg font-bold mb-4">Newsletter</h3>
+                    <p class="mb-4">
+                        Subscribe to our newsletter to receive updates on school events, academic programs, and more.
+                    </p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-r-lg transition-colors duration-300">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 animate-on-scroll" data-delay="700">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p>
+                        &copy; 2023 Lycée Excellence, Béjaïa. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a>
+                        <a href="#" class="hover:text-white transition-colors duration-300">Terms of Service</a>
+                        <a href="#" class="hover:text-white transition-colors duration-300">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top fixed bottom-8 right-8 bg-primary-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-primary-700 transition-all duration-300 transform hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Teachers Page (empty for now) -->
+    <div id="teachers-page" style="display: none;">
+        <section class="py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">Our Teaching Staff</h2>
+                <main>
+        <h2>Planning des professeurs</h2>
+        <table>
+            <tr>
+                <th>Nom & Prénom</th>
+                <th>Matière</th>
+                <th>Jour de réception</th>
+                <th>Heure</th>
+            </tr>
+            <tr>
+                <td>Mme. Asema Kafia</td>
+                <td>Mathématiques</td>
+                <td>Lundi</td>
+                <td>10h - 12h</td>
+            </tr>
+            <tr>
+                <td>Mme.</td>
+                <td>Mathématiques</td>
+                <td>Mercredi</td>
+                <td>14h - 16h</td>
+            </tr>
+            <tr>
+                <td>Mr. Tani Saleh</td>
+                <td>Mathématiques</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Djelouli Njima</td>
+                <td>Mathématiques</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Ahmime Yamina</td>
+                <td>Mathématiques</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Aboud Hayat</td>
+                <td>Physique</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mr. Berghel Omar</td>
+                <td>Physique</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mr. Mseroua Abdelmalek</td>
+                <td>Physique</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mr. Zbicha Ahmed</td>
+                <td>Physique</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mr. Mikhaldi Imad</td>
+                <td>Science</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Ziani Sabrina</td>
+                <td>Science</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Yousfi Fadia</td>
+                <td>Science</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Ouali Katia</td>
+                <td>Economie</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Arab Kahina</td>
+                <td>Economie</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Mekhlouf Farah</td>
+                <td>Arabe</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mr. Mourad Jamel</td>
+                <td>Arabe</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Mhenna Zakia</td>
+                <td>Arabe</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Blimane Wahida</td>
+                <td>Arabe</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Goumeziane Wafa</td>
+                <td>Arabe</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Heddadi Narimane</td>
+                <td>Français</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Odak Nassima</td>
+                <td>Français</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Saou Lamia</td>
+                <td>Français</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mr. Mezhoud Hamza</td>
+                <td>Français</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Halfoun Farida</td>
+                <td>Anglais</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Dali Dalila</td>
+                <td>Anglais</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Bekouche Laila</td>
+                <td>Anglais</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Mellali Siham</td>
+                <td>Anglais</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Zerrari Zakia</td>
+                <td>Tamazight</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Ameziane Sabrina</td>
+                <td>Tamazight</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Beqqa Dalila</td>
+                <td>Tamazight</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Saidi Kahina</td>
+                <td>Tamazight</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mr. Laariche Abdelaziz</td>
+                <td>Espagnol</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Khalfi Leila</td>
+                <td>Philosophie</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mr. Goujil Yahya</td>
+                <td>Philosophie</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Nasri Hajira</td>
+                <td>His/Géo</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Bensafia Samia</td>
+                <td>His/Géo</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Rbiha Firouz</td>
+                <td>His/Géo</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mr. Amouche Azeddine</td>
+                <td>His/Géo</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Fermas Fatima</td>
+                <td>Science Islamique</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mr. </td>
+                <td>Science Islamique</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Ouari Sakina</td>
+                <td>Génie Éléctrique</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mr. Mlihi Said</td>
+                <td>Génie Éléctrique</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Gouiri Nadia</td>
+                <td>Informatique</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mr. Daoud Soufiane</td>
+                <td>EPS</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mme. Chabou Malika</td>
+                <td>EPS</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+            <tr>
+                <td>Mr. Berchouche Jamel</td>
+                <td>EPS</td>
+                <td>Lundi</td>
+                <td>09h - 11h</td>
+            </tr>
+        </table>
+    </main>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        
+        function toggleTheme() {
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+        
+        themeToggle.addEventListener('click', toggleTheme);
+        themeToggleMobile.addEventListener('click', toggleTheme);
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (mobileMenu.classList.contains('open')) {
+                        mobileMenu.classList.remove('open');
+                    }
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+        
+        function checkScroll() {
+            animateElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+        
+        // Set delay for each animated element
+        animateElements.forEach((element, index) => {
+            const delay = element.dataset.delay || 0;
+            element.style.transitionDelay = `${delay}ms`;
+        });
+        
+        // Check if we're on the teachers page
+        if (window.location.pathname.includes('#teachers')) {
+            document.body.innerHTML = document.getElementById('teachers-page').innerHTML;
+            
+            // Here you would typically fetch teacher data and populate the table
+            // For demonstration, we'll add some sample data
+            const teachers = [
+                {
+                    name: "Dr. Ahmed Benmoussa",
+                    subject: "Mathematics",
+                    qualification: "PhD in Applied Mathematics",
+                    experience: "15 years",
+                    email: "a.benmoussa@lycee-excellence.dz"
+                },
+                {
+                    name: "Prof. Fatima Zohra",
+                    subject: "Physics",
+                    qualification: "MSc in Theoretical Physics",
+                    experience: "12 years",
+                    email: "f.zohra@lycee-excellence.dz"
+                },
+                {
+                    name: "Mr. Karim Belkacem",
+                    subject: "Computer Science",
+                    qualification: "MSc in Computer Engineering",
+                    experience: "8 years",
+                    email: "k.belkacem@lycee-excellence.dz"
+                },
+                {
+                    name: "Ms. Amina Cherif",
+                    subject: "English Literature",
+                    qualification: "MA in English Literature",
+                    experience: "10 years",
+                    email: "a.cherif@lycee-excellence.dz"
+                },
+                {
+                    name: "Dr. Youcef Boukherroub",
+                    subject: "Chemistry",
+                    qualification: "PhD in Organic Chemistry",
+                    experience: "18 years",
+                    email: "y.boukherroub@lycee-excellence.dz"
+                }
+            ];
+            
+            const tbody = document.querySelector('tbody');
+            
+            teachers.forEach(teacher => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200';
+                
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-200">${teacher.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">${teacher.subject}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">${teacher.qualification}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">${teacher.experience}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
+                        <a href="mailto:${teacher.email}" class="text-primary-600 dark:text-primary-400 hover:underline">${teacher.email}</a>
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+            
+            // Reinitialize dark mode toggle for the teachers page
+            const newThemeToggle = document.createElement('button');
+            newThemeToggle.id = 'theme-toggle';
+            newThemeToggle.className = 'theme-toggle p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 fixed top-4 right-4';
+            newThemeToggle.innerHTML = '<i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline"></i>';
+            newThemeToggle.addEventListener('click', toggleTheme);
+            document.body.appendChild(newThemeToggle);
+            
+            // Reinitialize back to top button for the teachers page
+            const newBackToTop = document.createElement('button');
+            newBackToTop.id = 'back-to-top';
+            newBackToTop.className = 'back-to-top fixed bottom-8 right-8 bg-primary-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-primary-700 transition-all duration-300 transform hover:scale-110';
+            newBackToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+            newBackToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            document.body.appendChild(newBackToTop);
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    newBackToTop.classList.add('active');
+                } else {
+                    newBackToTop.classList.remove('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+                
