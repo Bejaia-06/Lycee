@@ -145,6 +145,77 @@
         .mobile-menu.open {
             max-height: 500px;
         }
+         table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+thead {
+    background-color: #f4f4f4;
+  }
+
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tr:hover {
+    background-color: #f9f9f9;
+  }
+
+  th {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #333;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #fcfcfc;
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+
+  @media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+
+    tr {
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    th {
+      display: none;
+    }
+
+    td {
+      position: relative;
+      padding-left: 50%;
+    }
+
+    td::before {
+      position: absolute;
+      left: 15px;
+      top: 12px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    td:nth-of-type(1)::before { content: "Nom & Prénom"; }
+    td:nth-of-type(2)::before { content: "Matière"; }
+    td:nth-of-type(3)::before { content: "Jour de réception"; }
+    td:nth-of-type(4)::before { content: "Heure"; }
+  }
         
     </style>
 </head>
@@ -529,219 +600,7 @@
             </div>
         </div>
     </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 animate-on-scroll">Contact Us</h2>
-                <div class="w-20 h-1 bg-primary-600 mx-auto mb-6 animate-on-scroll" data-delay="100"></div>
-                <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 animate-on-scroll" data-delay="200">
-                    We'd love to hear from you. Reach out with any questions or to schedule a visit.
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-12">
-                <div class="animate-on-scroll" data-delay="300">
-                    <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md">
-                        <h3 class="text-2xl font-bold mb-6">Send Us a Message</h3>
-                        <form>
-                            <div class="mb-6">
-                                <label for="name" class="block text-gray-700 dark:text-gray-300 mb-2">Full Name</label>
-                                <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800">
-                            </div>
-                            <div class="mb-6">
-                                <label for="email" class="block text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
-                                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800">
-                            </div>
-                            <div class="mb-6">
-                                <label for="subject" class="block text-gray-700 dark:text-gray-300 mb-2">Subject</label>
-                                <input type="text" id="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800">
-                            </div>
-                            <div class="mb-6">
-                                <label for="message" class="block text-gray-700 dark:text-gray-300 mb-2">Message</label>
-                                <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800"></textarea>
-                            </div>
-                            <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
-                                Send Message
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                
-                <div class="animate-on-scroll" data-delay="400">
-                    <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md h-full">
-                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mr-4">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Address</h4>
-                                    <p class="text-gray-600 dark:text-gray-300">123 Education Street, Béjaïa 06000, Algeria</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mr-4">
-                                    <i class="fas fa-phone-alt"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Phone</h4>
-                                    <p class="text-gray-600 dark:text-gray-300">+213 34 12 34 56</p>
-                                    <p class="text-gray-600 dark:text-gray-300">+213 34 12 34 57</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mr-4">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Email</h4>
-                                    <p class="text-gray-600 dark:text-gray-300">contact@lycee-excellence.dz</p>
-                                    <p class="text-gray-600 dark:text-gray-300">admissions@lycee-excellence.dz</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mr-4">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <div>
-                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Office Hours</h4>
-                                    <p class="text-gray-600 dark:text-gray-300">Sunday - Thursday: 8:00 AM - 4:00 PM</p>
-                                    <p class="text-gray-600 dark:text-gray-300">Friday - Saturday: Closed</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8">
-                            <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">Follow Us</h4>
-                            <div class="flex space-x-4">
-                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
-                                    <i class="fab fa-youtube"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Map Section -->
-    <div class="h-96 w-full animate-on-scroll" data-delay="500">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d102320.12039019035!2d5.003394!3d36.7538848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128da3e5a7a4f1d3%3A0x8dd3e5a5e5a5e5a5!2sB%C3%A9ja%C3%AFa!5e0!3m2!1sen!2sdz!4v1620000000000!5m2!1sen!2sdz" 
-                width="100%" 
-                height="100%" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy"
-                class="filter grayscale-[50%] hover:grayscale-0 transition-all duration-500"></iframe>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300 pt-16 pb-8">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8 mb-12">
-                <div class="animate-on-scroll" data-delay="300">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold mr-3">LE</div>
-                        <span class="text-xl font-bold text-white">Lycée Excellence</span>
-                    </div>
-                    <p class="mb-4">
-                        Providing quality education in Béjaïa since 2013. Committed to excellence in academics, character development, and community service.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="animate-on-scroll" data-delay="400">
-                    <h3 class="text-white text-lg font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="hover:text-white transition-colors duration-300">Home</a></li>
-                        <li><a href="#about" class="hover:text-white transition-colors duration-300">About Us</a></li>
-                        <li><a href="#programs" class="hover:text-white transition-colors duration-300">Academic Programs</a></li>
-                        <li><a href="#projects" class="hover:text-white transition-colors duration-300">Student Projects</a></li>
-                        <li><a href="#news" class="hover:text-white transition-colors duration-300">News</a></li>
-                        <li><a href="#teachers" class="hover:text-white transition-colors duration-300">Teachers</a></li>
-                        <li><a href="#contact" class="hover:text-white transition-colors duration-300">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="animate-on-scroll" data-delay="500">
-                    <h3 class="text-white text-lg font-bold mb-4">Academic Programs</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Science Stream</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Mathematics Stream</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Languages & Literature</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Technology & Computer Science</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Arts & Humanities</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors duration-300">Sports & Athletics</a></li>
-                    </ul>
-                </div>
-                
-                <div class="animate-on-scroll" data-delay="600">
-                    <h3 class="text-white text-lg font-bold mb-4">Newsletter</h3>
-                    <p class="mb-4">
-                        Subscribe to our newsletter to receive updates on school events, academic programs, and more.
-                    </p>
-                    <form class="flex">
-                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-gray-800">
-                        <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-r-lg transition-colors duration-300">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-700 pt-8 animate-on-scroll" data-delay="700">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p>
-                        &copy; 2023 Lycée Excellence, Béjaïa. All rights reserved.
-                    </p>
-                    <div class="flex space-x-6 mt-4 md:mt-0">
-                        <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a>
-                        <a href="#" class="hover:text-white transition-colors duration-300">Terms of Service</a>
-                        <a href="#" class="hover:text-white transition-colors duration-300">Sitemap</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <button id="back-to-top" class="back-to-top fixed bottom-8 right-8 bg-primary-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-primary-700 transition-all duration-300 transform hover:scale-110">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
+    
     <!-- Teachers Page (empty for now) -->
     <div id="teachers-page">
         <section class="py-20">
@@ -1037,6 +896,217 @@
         </section>
     </div>
 
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 animate-on-scroll">Contact Us</h2>
+                <div class="w-20 h-1 bg-primary-600 mx-auto mb-6 animate-on-scroll" data-delay="100"></div>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 animate-on-scroll" data-delay="200">
+                    We'd love to hear from you. Reach out with any questions or to schedule a visit.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="animate-on-scroll" data-delay="300">
+                    <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md">
+                        <h3 class="text-2xl font-bold mb-6">Send Us a Message</h3>
+                        <form>
+                            <div class="mb-6">
+                                <label for="name" class="block text-gray-700 dark:text-gray-300 mb-2">Full Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800">
+                            </div>
+                            <div class="mb-6">
+                                <label for="email" class="block text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800">
+                            </div>
+                            <div class="mb-6">
+                                <label for="subject" class="block text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                                <input type="text" id="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent dark:bg-gray-800"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-[1.02]">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll" data-delay="400">
+                    <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md h-full">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mr-4">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Address</h4>
+                                    <p class="text-gray-600 dark:text-gray-300">123 Education Street, Béjaïa 06000, Algeria</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mr-4">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Phone</h4>
+                                    <p class="text-gray-600 dark:text-gray-300">+213 34 12 34 56</p>
+                                    <p class="text-gray-600 dark:text-gray-300">+213 34 12 34 57</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mr-4">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Email</h4>
+                                    <p class="text-gray-600 dark:text-gray-300">contact@lycee-excellence.dz</p>
+                                    <p class="text-gray-600 dark:text-gray-300">admissions@lycee-excellence.dz</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-600 dark:text-primary-400 mr-4">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-1">Office Hours</h4>
+                                    <p class="text-gray-600 dark:text-gray-300">Sunday - Thursday: 8:00 AM - 4:00 PM</p>
+                                    <p class="text-gray-600 dark:text-gray-300">Friday - Saturday: Closed</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-900 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <div class="h-96 w-full animate-on-scroll" data-delay="500">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d102320.12039019035!2d5.003394!3d36.7538848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128da3e5a7a4f1d3%3A0x8dd3e5a5e5a5e5a5!2sB%C3%A9ja%C3%AFa!5e0!3m2!1sen!2sdz!4v1620000000000!5m2!1sen!2sdz" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy"
+                class="filter grayscale-[50%] hover:grayscale-0 transition-all duration-500"></iframe>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="animate-on-scroll" data-delay="300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold mr-3">LE</div>
+                        <span class="text-xl font-bold text-white">Lycée Excellence</span>
+                    </div>
+                    <p class="mb-4">
+                        Providing quality education in Béjaïa since 2013. Committed to excellence in academics, character development, and community service.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll" data-delay="400">
+                    <h3 class="text-white text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="hover:text-white transition-colors duration-300">Home</a></li>
+                        <li><a href="#about" class="hover:text-white transition-colors duration-300">About Us</a></li>
+                        <li><a href="#programs" class="hover:text-white transition-colors duration-300">Academic Programs</a></li>
+                        <li><a href="#projects" class="hover:text-white transition-colors duration-300">Student Projects</a></li>
+                        <li><a href="#news" class="hover:text-white transition-colors duration-300">News</a></li>
+                        <li><a href="#teachers" class="hover:text-white transition-colors duration-300">Teachers</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="animate-on-scroll" data-delay="500">
+                    <h3 class="text-white text-lg font-bold mb-4">Academic Programs</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Science Stream</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Mathematics Stream</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Languages & Literature</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Technology & Computer Science</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Arts & Humanities</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Sports & Athletics</a></li>
+                    </ul>
+                </div>
+                
+                <div class="animate-on-scroll" data-delay="600">
+                    <h3 class="text-white text-lg font-bold mb-4">Newsletter</h3>
+                    <p class="mb-4">
+                        Subscribe to our newsletter to receive updates on school events, academic programs, and more.
+                    </p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-r-lg transition-colors duration-300">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 animate-on-scroll" data-delay="700">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p>
+                        &copy; 2023 Lycée Excellence, Béjaïa. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a>
+                        <a href="#" class="hover:text-white transition-colors duration-300">Terms of Service</a>
+                        <a href="#" class="hover:text-white transition-colors duration-300">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top fixed bottom-8 right-8 bg-primary-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-primary-700 transition-all duration-300 transform hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
     <script>
         // Dark mode toggle
         const themeToggle = document.getElementById('theme-toggle');
