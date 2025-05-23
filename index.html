@@ -602,10 +602,11 @@ thead {
     </section>
     
     <!-- Teachers Page (empty for now) -->
-    <div id="teachers-page">
+    <div id="teachersTable">
         <section class="py-20">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">Our Teaching Staff</h2>
+                <input type="text" id="searchInput" placeholder="Rechercher un professeur..." style="margin-bottom: 15px; padding: 10px; width: 100%; max-width: 400px; border: 1px solid #ccc; border-radius: 4px;">
                 <main>
         <table>
             <tr>
@@ -1173,6 +1174,16 @@ thead {
                 }
             });
         });
+
+        document.getElementById('searchInput').addEventListener('keyup', function () {
+    const filter = this.value.toLowerCase();
+    const rows = document.querySelectorAll('#teachersTable tbody tr');
+
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      row.style.display = text.includes(filter) ? '' : 'none';
+    });
+  });
         
         // Animation on scroll
         const animateElements = document.querySelectorAll('.animate-on-scroll');
@@ -1199,7 +1210,7 @@ thead {
         
         // Check if we're on the teachers page
         if (window.location.pathname.includes('#teachers')) {
-            document.body.innerHTML = document.getElementById('teachers-page').innerHTML;
+            document.body.innerHTML = document.getElementById('teachersTable').innerHTML;
             
             // Here you would typically fetch teacher data and populate the table
             // For demonstration, we'll add some sample data
