@@ -267,7 +267,7 @@ body.dark .responsive-table tr:hover {
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
                     <a href="#" class="flex items-center">
-                        <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold mr-3">LE</div>
+                        <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold mr-3">SAL</div>
                         <span class="text-xl font-bold text-primary-600 dark:text-primary-400">Lycée Sidi Ali-Lebhar</span>
                     </a>
                 </div>
@@ -279,7 +279,7 @@ body.dark .responsive-table tr:hover {
                     <a href="#programs" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Academic Programs</a>
                     <a href="#projects" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Projects</a>
                     <a href="#news" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">News</a>
-                    <a href="#teachers" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Teachers</a>
+                    <a href="#teachersTable" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Teachers</a>
                     <a href="#contact" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Contact</a>
                     
                     <button id="theme-toggle" class="theme-toggle p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
@@ -304,7 +304,7 @@ body.dark .responsive-table tr:hover {
                     <a href="#programs" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Academic Programs</a>
                     <a href="#projects" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Projects</a>
                     <a href="#news" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">News</a>
-                    <a href="#teachers" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Teachers</a>
+                    <a href="#teachersTable" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Teachers</a>
                     <a href="#contact" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Contact</a>
                     
                     <div class="px-3 py-2">
@@ -1133,7 +1133,7 @@ body.dark .responsive-table tr:hover {
                         <li><a href="#programs" class="hover:text-white transition-colors duration-300">Academic Programs</a></li>
                         <li><a href="#projects" class="hover:text-white transition-colors duration-300">Student Projects</a></li>
                         <li><a href="#news" class="hover:text-white transition-colors duration-300">News</a></li>
-                        <li><a href="#teachers" class="hover:text-white transition-colors duration-300">Teachers</a></li>
+                        <li><a href="#teachersTable" class="hover:text-white transition-colors duration-300">Teachers</a></li>
                         <li><a href="#contact" class="hover:text-white transition-colors duration-300">Contact</a></li>
                     </ul>
                 </div>
@@ -1284,7 +1284,7 @@ body.dark .responsive-table tr:hover {
         });
         
         // Check if we're on the teachers page
-        if (window.location.pathname.includes('#teachers')) {
+        if (window.location.pathname.includes('#teachersTable')) {
             document.body.innerHTML = document.getElementById('teachersTable').innerHTML;
             
             // Here you would typically fetch teacher data and populate the table
