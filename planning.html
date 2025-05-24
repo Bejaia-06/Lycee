@@ -958,28 +958,7 @@
             });
         });
 
-        // Système de recherche pour les professeurs
-        document.getElementById('teacherSearch').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const rows = document.querySelectorAll('#teachersTable tbody tr');
-            
-            rows.forEach(row => {
-                const name = row.cells[0].textContent.toLowerCase();
-                const subject = row.cells[1].textContent.toLowerCase();
-                const day = row.cells[2].textContent.toLowerCase();
-                const time = row.cells[3].textContent.toLowerCase();
-                
-                if (name.includes(searchTerm) || 
-                    subject.includes(searchTerm) || 
-                    day.includes(searchTerm) || 
-                    time.includes(searchTerm)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-
+  
         // Animation on scroll
         const animateElements = document.querySelectorAll('.animate-on-scroll');
         
