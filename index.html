@@ -145,119 +145,138 @@
         .mobile-menu.open {
             max-height: 500px;
         }
-         table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-thead {
-    background-color: #f4f4f4;
-  }
-
-  th, td {
-    padding: 12px 16px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-
-  tr:hover {
-    background-color: #f9f9f9;
-  }
-
-  th {
-    text-transform: uppercase;
-    font-weight: bold;
-    color: #333;
-  }
-
-  tbody tr:nth-child(even) {
-    background-color: #fcfcfc;
-  }
-
-  tbody tr:nth-child(odd) {
-    background-color: #ffffff;
-  }
-
-  @media (max-width: 768px) {
-    table, thead, tbody, th, td, tr {
-      display: block;
-    }
-
-    tr {
-      margin-bottom: 1rem;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    th {
-      display: none;
-    }
-
-    td {
-      position: relative;
-      padding-left: 50%;
-    }
-
-    td::before {
-      position: absolute;
-      left: 15px;
-      top: 12px;
-      font-weight: bold;
-      white-space: nowrap;
-    }
-
-    td:nth-of-type(1)::before { content: "Nom & Prénom"; }
-    td:nth-of-type(2)::before { content: "Matière"; }
-    td:nth-of-type(3)::before { content: "Jour de réception"; }
-    td:nth-of-type(4)::before { content: "Heure"; }
-  }
         
-/* Tableau clair par défaut */
-.responsive-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  transition: background-color 0.3s, color 0.3s;
-}
+        /* Styles pour le tableau des professeurs */
+        .teachers-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
 
-.responsive-table th {
-  background-color: #f0f0f0;
-  color: #333;
-  padding: 12px;
-  text-align: left;
-  border-bottom: 2px solid #ccc;
-}
+        .teachers-table thead {
+            background-color: #f4f4f4;
+        }
 
-.responsive-table td {
-  padding: 10px;
-  color: #333;
-  border-bottom: 1px solid #ddd;
-}
+        .teachers-table th, 
+        .teachers-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
 
-/* Survol clair */
-.responsive-table tr:hover {
-  background-color: #f5f5f5;
-}
+        .teachers-table tr:hover {
+            background-color: #f9f9f9;
+        }
 
-/* 🎯 DARK MODE : fond bleu nuit */
-body.dark .responsive-table th,
-body.dark .responsive-table td {
-  background-color: #0a192f;  /* bleu nuit */
-  color: #e0e0e0;             /* texte clair */
-  border-color: #1e2a3a;
-}
+        .teachers-table th {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #333;
+        }
 
-/* Survol en dark mode */
-body.dark .responsive-table tr:hover {
-  background-color: #112240;
-}
+        .teachers-table tbody tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
 
+        .teachers-table tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        /* Dark mode pour le tableau */
+        body.dark .teachers-table thead {
+            background-color: #1a365d;
+        }
+
+        body.dark .teachers-table th,
+        body.dark .teachers-table td {
+            background-color: #0a192f;
+            color: #e0e0e0;
+            border-color: #1e2a3a;
+        }
+
+        body.dark .teachers-table tr:hover {
+            background-color: #112240;
+        }
+
+        body.dark .teachers-table tbody tr:nth-child(even) {
+            background-color: #0f172a;
+        }
+
+        body.dark .teachers-table tbody tr:nth-child(odd) {
+            background-color: #0a192f;
+        }
+
+        /* Style responsive pour mobile */
+        @media (max-width: 768px) {
+            .teachers-table, 
+            .teachers-table thead, 
+            .teachers-table tbody, 
+            .teachers-table th, 
+            .teachers-table td, 
+            .teachers-table tr {
+                display: block;
+            }
+
+            .teachers-table tr {
+                margin-bottom: 1rem;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+                border-radius: 5px;
+                overflow: hidden;
+            }
+
+            .teachers-table th {
+                display: none;
+            }
+
+            .teachers-table td {
+                position: relative;
+                padding-left: 50%;
+            }
+
+            .teachers-table td::before {
+                position: absolute;
+                left: 15px;
+                top: 12px;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+
+            .teachers-table td:nth-of-type(1)::before { content: "Nom & Prénom"; }
+            .teachers-table td:nth-of-type(2)::before { content: "Matière"; }
+            .teachers-table td:nth-of-type(3)::before { content: "Jour de réception"; }
+            .teachers-table td:nth-of-type(4)::before { content: "Heure"; }
+        }
         
+        /* Style pour la barre de recherche */
+        .search-box {
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+        }
+
+        body.dark .search-box {
+            background-color: #1e293b;
+            border-color: #334155;
+            color: #e0e0e0;
+        }
+
+        body.dark .search-box::placeholder {
+            color: #94a3b8;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
@@ -700,18 +719,28 @@ body.dark .responsive-table tr:hover {
         </div>
     </section>
     
-    <!-- Teachers Section -->
+   <!-- Teachers Section -->
 <section id="teachers" class="py-20">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">Our Teaching Staff</h2>
-        <input type="text" id="searchInput" class="animate-on-scroll" data-delay="0" placeholder="Rechercher un professeur..." style="margin-bottom: 15px; padding: 10px; width: 100%; max-width: 400px; border: 1px solid #ccc; border-radius: 4px;">
-        <table class="animate-on-scroll responsive-table" data-delay="200">
+        <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center animate-on-scroll">Notre Corps Enseignant</h2>
+        
+        <!-- Barre de recherche -->
+        <div class="flex justify-center mb-8 animate-on-scroll" data-delay="100">
+            <input type="text" id="teacherSearch" class="search-box" placeholder="Rechercher un professeur..." aria-label="Rechercher un professeur">
+        </div>
+        
+        <!-- Tableau des professeurs -->
+        <div class="overflow-x-auto animate-on-scroll" data-delay="200">
+            <table class="teachers-table" id="teachersTable">
+                <thead>
             <tr>
                 <th>Nom & Prénom</th>
                 <th>Matière</th>
                 <th>Jour de réception</th>
                 <th>Heure</th>
             </tr>
+                </thead>
+                <tbody>
             <tr>
                 <td>Mme. Asema Kafia</td>
                 <td>Mathématiques</td>
@@ -988,12 +1017,11 @@ body.dark .responsive-table tr:hover {
                 <td>Lundi</td>
                 <td>09h - 11h</td>
             </tr>
-        </table>
-    </main>
-            </div>
-        </section>
+           </tbody>
+            </table>
+        </div>
     </div>
-
+</section>
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800">
         <div class="container mx-auto px-4">
@@ -1205,7 +1233,7 @@ body.dark .responsive-table tr:hover {
     <button id="back-to-top" class="back-to-top fixed bottom-8 right-8 bg-primary-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-primary-700 transition-all duration-300 transform hover:scale-110">
         <i class="fas fa-arrow-up"></i>
     </button>
-    <script>
+      <script>
         // Dark mode toggle
         const themeToggle = document.getElementById('theme-toggle');
         const themeToggleMobile = document.getElementById('theme-toggle-mobile');
@@ -1223,12 +1251,31 @@ body.dark .responsive-table tr:hover {
         themeToggle.addEventListener('click', toggleTheme);
         themeToggleMobile.addEventListener('click', toggleTheme);
         
+        // Set initial theme based on localStorage or preference
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('open');
+            const isOpen = mobileMenu.classList.contains('open');
+            mobileMenuButton.setAttribute('aria-expanded', isOpen);
+            mobileMenuButton.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+                mobileMenuButton.setAttribute('aria-label', 'Open menu');
+            });
         });
         
         // Back to top button
@@ -1267,21 +1314,35 @@ body.dark .responsive-table tr:hover {
                     // Close mobile menu if open
                     if (mobileMenu.classList.contains('open')) {
                         mobileMenu.classList.remove('open');
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                        mobileMenuButton.setAttribute('aria-label', 'Open menu');
                     }
                 }
             });
         });
 
-        document.getElementById('searchInput').addEventListener('keyup', function () {
-    const filter = this.value.toLowerCase();
-    const rows = document.querySelectorAll('#teachersTable tbody tr');
+        // Système de recherche pour les professeurs
+        document.getElementById('teacherSearch').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#teachersTable tbody tr');
+            
+            rows.forEach(row => {
+                const name = row.cells[0].textContent.toLowerCase();
+                const subject = row.cells[1].textContent.toLowerCase();
+                const day = row.cells[2].textContent.toLowerCase();
+                const time = row.cells[3].textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || 
+                    subject.includes(searchTerm) || 
+                    day.includes(searchTerm) || 
+                    time.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
 
-    rows.forEach(row => {
-      const text = row.textContent.toLowerCase();
-      row.style.display = text.includes(filter) ? '' : 'none';
-    });
-  });
-        
         // Animation on scroll
         const animateElements = document.querySelectorAll('.animate-on-scroll');
         
@@ -1304,8 +1365,6 @@ body.dark .responsive-table tr:hover {
             const delay = element.dataset.delay || 0;
             element.style.transitionDelay = `${delay}ms`;
         });
-        
     </script>
 </body>
 </html>
-                
