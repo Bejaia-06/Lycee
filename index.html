@@ -279,7 +279,7 @@ body.dark .responsive-table tr:hover {
                     <a href="#programs" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Academic Programs</a>
                     <a href="#projects" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Projects</a>
                     <a href="#news" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">News</a>
-                    <a href="#teachersTable" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Teachers</a>
+                    <a href="#teachers" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Teachers</a>
                     <a href="#contact" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">Contact</a>
                     
                     <button id="theme-toggle" class="theme-toggle p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
@@ -304,7 +304,7 @@ body.dark .responsive-table tr:hover {
                     <a href="#programs" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Academic Programs</a>
                     <a href="#projects" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Projects</a>
                     <a href="#news" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">News</a>
-                    <a href="#teachersTable" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Teachers</a>
+                    <a href="#teachers" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Teachers</a>
                     <a href="#contact" class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Contact</a>
                     
                     <div class="px-3 py-2">
@@ -676,14 +676,12 @@ body.dark .responsive-table tr:hover {
         </div>
     </section>
     
-    <!-- Teachers Page (empty for now) -->
-    <div id="teachersTable">
-        <section class="py-20">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">Our Teaching Staff</h2>
-                <input type="text" id="searchInput" class="animate-on-scroll" data-delay="0" placeholder="Rechercher un professeur..." style="margin-bottom: 15px; padding: 10px; width: 100%; max-width: 400px; border: 1px solid #ccc; border-radius: 4px;">
-                <main>
-        <table id="teachersTable" class="animate-on-scroll responsive-table" data-delay="200">
+    <!-- Teachers Section -->
+<section id="teachers" class="py-20">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">Our Teaching Staff</h2>
+        <input type="text" id="searchInput" class="animate-on-scroll" data-delay="0" placeholder="Rechercher un professeur..." style="margin-bottom: 15px; padding: 10px; width: 100%; max-width: 400px; border: 1px solid #ccc; border-radius: 4px;">
+        <table class="animate-on-scroll responsive-table" data-delay="200">
             <tr>
                 <th>Nom & Prénom</th>
                 <th>Matière</th>
@@ -1283,98 +1281,6 @@ body.dark .responsive-table tr:hover {
             element.style.transitionDelay = `${delay}ms`;
         });
         
-        // Check if we're on the teachers page
-        if (window.location.pathname.includes('#teachersTable')) {
-            document.body.innerHTML = document.getElementById('teachersTable').innerHTML;
-            
-            // Here you would typically fetch teacher data and populate the table
-            // For demonstration, we'll add some sample data
-            const teachers = [
-                {
-                    name: "Dr. Ahmed Benmoussa",
-                    subject: "Mathematics",
-                    qualification: "PhD in Applied Mathematics",
-                    experience: "15 years",
-                    email: "a.benmoussa@lycee-excellence.dz"
-                },
-                {
-                    name: "Prof. Fatima Zohra",
-                    subject: "Physics",
-                    qualification: "MSc in Theoretical Physics",
-                    experience: "12 years",
-                    email: "f.zohra@lycee-excellence.dz"
-                },
-                {
-                    name: "Mr. Karim Belkacem",
-                    subject: "Computer Science",
-                    qualification: "MSc in Computer Engineering",
-                    experience: "8 years",
-                    email: "k.belkacem@lycee-excellence.dz"
-                },
-                {
-                    name: "Ms. Amina Cherif",
-                    subject: "English Literature",
-                    qualification: "MA in English Literature",
-                    experience: "10 years",
-                    email: "a.cherif@lycee-excellence.dz"
-                },
-                {
-                    name: "Dr. Youcef Boukherroub",
-                    subject: "Chemistry",
-                    qualification: "PhD in Organic Chemistry",
-                    experience: "18 years",
-                    email: "y.boukherroub@lycee-excellence.dz"
-                }
-            ];
-            
-            const tbody = document.querySelector('tbody');
-            
-            teachers.forEach(teacher => {
-                const row = document.createElement('tr');
-                row.className = 'hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200';
-                
-                row.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-200">${teacher.name}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">${teacher.subject}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">${teacher.qualification}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">${teacher.experience}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
-                        <a href="mailto:${teacher.email}" class="text-primary-600 dark:text-primary-400 hover:underline">${teacher.email}</a>
-                    </td>
-                `;
-                
-                tbody.appendChild(row);
-            });
-            
-            // Reinitialize dark mode toggle for the teachers page
-            const newThemeToggle = document.createElement('button');
-            newThemeToggle.id = 'theme-toggle';
-            newThemeToggle.className = 'theme-toggle p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 fixed top-4 right-4';
-            newThemeToggle.innerHTML = '<i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline"></i>';
-            newThemeToggle.addEventListener('click', toggleTheme);
-            document.body.appendChild(newThemeToggle);
-            
-            // Reinitialize back to top button for the teachers page
-            const newBackToTop = document.createElement('button');
-            newBackToTop.id = 'back-to-top';
-            newBackToTop.className = 'back-to-top fixed bottom-8 right-8 bg-primary-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-primary-700 transition-all duration-300 transform hover:scale-110';
-            newBackToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
-            newBackToTop.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-            document.body.appendChild(newBackToTop);
-            
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    newBackToTop.classList.add('active');
-                } else {
-                    newBackToTop.classList.remove('active');
-                }
-            });
-        }
     </script>
 </body>
 </html>
