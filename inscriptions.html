@@ -5,78 +5,16 @@
   <title>Inscription</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- Tailwind via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            primary: {
-              50: '#f0f9ff',
-              100: '#e0f2fe',
-              200: '#bae6fd',
-              300: '#7dd3fc',
-              400: '#38bdf8',
-              500: '#0ea5e9',
-              600: '#0284c7',
-              700: '#0369a1',
-              800: '#075985',
-              900: '#0c4a6e',
-            },
-            secondary: {
-              50: '#f8fafc',
-              100: '#f1f5f9',
-              200: '#e2e8f0',
-              300: '#cbd5e1',
-              400: '#94a3b8',
-              500: '#64748b',
-              600: '#475569',
-              700: '#334155',
-              800: '#1e293b',
-              900: '#0f172a',
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            heading: ['Montserrat', 'sans-serif'],
-          },
-          animation: {
-            'fade-in': 'fadeIn 0.5s ease-in-out',
-            'slide-up': 'slideUp 0.5s ease-out',
-          },
-          keyframes: {
-            fadeIn: {
-              '0%': { opacity: '0' },
-              '100%': { opacity: '1' },
-            },
-            slideUp: {
-              '0%': { transform: 'translateY(20px)', opacity: '0' },
-              '100%': { transform: 'translateY(0)', opacity: '1' },
-            }
-          }
-        }
-      }
-    }
-  </script>
-  
-  <!-- Polices -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Style personnalisé -->
+  <!-- Tu peux ajouter ton propre CSS ici -->
   <style>
     body {
-      font-family: 'Inter', sans-serif;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f2f2f2;
     }
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Montserrat', sans-serif;
-    }
-
     form {
       max-width: 400px;
-      margin: 4rem auto;
+      margin: auto;
       background: white;
       padding: 2rem;
       border-radius: 10px;
@@ -92,59 +30,68 @@
     button {
       width: 100%;
       padding: 1rem;
-      background: #0ea5e9;
+      background: #007bff;
       color: white;
       border: none;
       border-radius: 5px;
       font-size: 1rem;
       cursor: pointer;
-      transition: background 0.3s ease;
     }
     button:hover {
-      background: #0284c7;
-    }
-    body.dark form {
-      background-color: #1e293b;
-      color: #e0e0e0;
-    }
-    body.dark input {
-      background-color: #0f172a;
-      color: #e0e0e0;
-      border-color: #334155;
-    }
-    body.dark button {
-      background-color: #0ea5e9;
+      background: #0056b3;
     }
   </style>
 </head>
-<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+<body>
 
-  <!-- Formulaire d'inscription -->
-  <form>
-    <h2 class="text-2xl font-heading mb-4 text-center text-primary-600 dark:text-primary-400">Créer un compte</h2>
-    
-    <label for="nom">Nom complet</label>
-    <input type="text" id="nom" name="nom" placeholder="Entrez votre nom complet" required>
-
-    <label for="email">Adresse e-mail</label>
-    <input type="email" id="email" name="email" placeholder="Entrez votre e-mail" required>
-
-    <label for="motdepasse">Mot de passe</label>
-    <input type="password" id="motdepasse" name="motdepasse" placeholder="Créez un mot de passe" required>
-
-    <label for="confirm">Confirmer le mot de passe</label>
-    <input type="password" id="confirm" name="confirm" placeholder="Répétez le mot de passe" required>
-
+  <h2>Créer un compte</h2>
+  <form onsubmit="registerUser(event)">
+    <input type="text" id="prenom" placeholder="Prénom" required>
+    <input type="text" id="nom" placeholder="Nom" required>
+    <input type="email" id="email" placeholder="E-mail" required>
+    <input type="password" id="password" placeholder="Mot de passe" required>
     <button type="submit">S'inscrire</button>
   </form>
 
-<div class="text-center mt-8">
-  <a href="index.html">
-    <button class="bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2 px-4 rounded transition duration-300">
-      Retour à l'accueil
-    </button>
-  </a>
-</div>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+  <script>
+    // Configuration Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCdJSSt92W9zT4HeECq9vV6NMW97ONTxcw",
+      authDomain: "lycee-be595.firebaseapp.com",
+      projectId: "lycee-be595",
+      storageBucket: "lycee-be595.firebasestorage.app",
+      messagingSenderId: "711125923660",
+      appId: "1:711125923660:web:86b20d9c10524f4fca81e9",
+      measurementId: "G-Z7CZ6P0JDT"
+    };
+
+    // Initialisation Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Fonction d'inscription
+    function registerUser(event) {
+      event.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          user.sendEmailVerification()
+            .then(() => {
+              alert("Inscription réussie ! Un e-mail de confirmation a été envoyé.");
+            });
+        })
+        .catch((error) => {
+          alert("Erreur : " + error.message);
+        });
+    }
+  </script>
 
 </body>
 </html>
