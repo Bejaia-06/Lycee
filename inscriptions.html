@@ -2,112 +2,95 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Inscription Élève</title>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <title>Inscription</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Tu peux ajouter ton propre CSS ici -->
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 2rem;
+      padding: 2rem;
+      background-color: #f2f2f2;
     }
     form {
       max-width: 400px;
       margin: auto;
-      padding: 1rem;
-      border: 1px solid #ccc;
+      background: white;
+      padding: 2rem;
       border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    input, button {
-      display: block;
+    input {
       width: 100%;
-      margin-bottom: 1rem;
-      padding: 0.7rem;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
       font-size: 1rem;
+      cursor: pointer;
     }
-    .success {
-      color: green;
-      text-align: center;
-    }
-    .error {
-      color: red;
-      text-align: center;
+    button:hover {
+      background: #0056b3;
     }
   </style>
 </head>
 <body>
 
-  <!-- 🧾 FORMULAIRE D'INSCRIPTION -->
-  <form id="inscription-form">
-    <h2>Créer un compte</h2>
-    <input type="text" id="nom" placeholder="Nom" required />
-    <input type="text" id="prenom" placeholder="Prénom" required />
-    <input type="email" id="email" placeholder="E-mail" required />
-    <input type="password" id="motdepasse" placeholder="Mot de passe" required />
-    <div class="g-recaptcha" data-sitekey="6LcVr0grAAAAAJqQcLExhaTUOpa-9_dT-CljhUSs"></div>
+  <h2>Créer un compte</h2>
+  <form onsubmit="registerUser(event)">
+    <input type="text" id="prenom" placeholder="Prénom" required>
+    <input type="text" id="nom" placeholder="Nom" required>
+    <input type="email" id="email" placeholder="E-mail" required>
+    <input type="password" id="password" placeholder="Mot de passe" required>
     <button type="submit">S'inscrire</button>
-    <div class="success" id="success-msg"></div>
-    <div class="error" id="error-msg"></div>
   </form>
 
-  <!-- 🔌 CONFIGURATION FIREBASE -->
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
   <script>
+    // Configuration Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyCdJSSt92W9zT4HeECq9vV6NMW97ONTxcw",
       authDomain: "lycee-be595.firebaseapp.com",
       projectId: "lycee-be595",
+      storageBucket: "lycee-be595.firebasestorage.app",
+      messagingSenderId: "711125923660",
+      appId: "1:711125923660:web:86b20d9c10524f4fca81e9",
+      measurementId: "G-Z7CZ6P0JDT"
     };
 
+    // Initialisation Firebase
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
-    const db = firebase.firestore();
-  </script>
 
-  <!-- 🤖 SCRIPT INSCRIPTION -->
-  <script>
-    const form = document.getElementById('inscription-form');
-    const successMsg = document.getElementById('success-msg');
-    const errorMsg = document.getElementById('error-msg');
+    // Fonction d'inscription
+    function registerUser(event) {
+      event.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const nom = document.getElementById('nom').value.trim();
-      const prenom = document.getElementById('prenom').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('motdepasse').value;
-      const recaptchaResponse = grecaptcha.getResponse();
-
-      if (!recaptchaResponse) {
-        errorMsg.textContent = "Veuillez cocher 'Je ne suis pas un robot'.";
-        return;
-      }
-
-      try {
-        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-        const user = userCredential.user;
-
-        await user.sendEmailVerification();
-
-        await db.collection('utilisateurs').doc(user.uid).set({
-          nom: nom,
-          prenom: prenom,
-          email: email,
-          uid: user.uid,
-          inscrit_le: new Date()
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          user.sendEmailVerification()
+            .then(() => {
+              alert("Inscription réussie ! Un e-mail de confirmation a été envoyé.");
+            });
+        })
+        .catch((error) => {
+          alert("Erreur : " + error.message);
         });
-
-        successMsg.textContent = "Inscription réussie ! Vérifiez votre boîte mail.";
-        errorMsg.textContent = "";
-        form.reset();
-        grecaptcha.reset();
-      } catch (error) {
-        console.error(error);
-        errorMsg.textContent = error.message;
-        successMsg.textContent = "";
-      }
-    });
+    }
   </script>
 
 </body>
