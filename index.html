@@ -277,7 +277,7 @@
         body.dark .search-box::placeholder {
             color: #94a3b8;
         }
-    </style>   
+    </style>
 </head>
 <body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
     <!-- Navigation -->
@@ -1246,7 +1246,7 @@
     <button id="back-to-top" class="back-to-top fixed bottom-8 right-8 bg-primary-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-primary-700 transition-all duration-300 transform hover:scale-110">
         <i class="fas fa-arrow-up"></i>
     </button>
-<script>
+      <script>
         // Dark mode toggle
         const themeToggle = document.getElementById('theme-toggle');
         const themeToggleMobile = document.getElementById('theme-toggle-mobile');
@@ -1376,9 +1376,8 @@
         // Set delay for each animated element
         animateElements.forEach((element, index) => {
             const delay = element.dataset.delay || 0;
-            element.style.transitionDelay = ${delay}ms;
+            element.style.transitionDelay = `${delay}ms`;
         });
     </script>
-
 </body>
 </html>
