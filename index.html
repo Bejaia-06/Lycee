@@ -277,10 +277,72 @@
         body.dark .search-box::placeholder {
             color: #94a3b8;
         }
+
+    /* Overlay plein écran */
+    #authOverlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .auth-box {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    .auth-box h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    input, button {
+      width: 100%;
+      padding: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .switch-link {
+      text-align: center;
+      color: #007bff;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    #userBar {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px 15px;
+      display: none;
+    }
+        
     </style>
+      <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
-    <!-- Navigation -->
+<!-- Navigation -->
     <nav class="fixed w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-50 shadow-sm">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
@@ -289,6 +351,9 @@
                         <div class="w-10 h-10 rounded-full bg-primary-600 flex items-center justify-center text-white font-bold mr-3">SAL</div>
                         <span class="text-xl font-bold text-primary-600 dark:text-primary-400">Lycée Sidi Ali-Lebhar</span>
                     </a>
+                      <div id="userBar">
+                               Bonjour, <span id="userName"></span> | <button onclick="logout()">Se déconnecter</button>
+                      </div>
                 </div>
                 
                 <!-- Desktop Navigation -->
@@ -1246,6 +1311,100 @@
     <button id="back-to-top" class="back-to-top fixed bottom-8 right-8 bg-primary-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-primary-700 transition-all duration-300 transform hover:scale-110">
         <i class="fas fa-arrow-up"></i>
     </button>
+        <!-- Auth Overlay -->
+  <div id="authOverlay">
+    <div class="auth-box" id="signupBox">
+      <h2>Créer un compte</h2>
+      <input type="text" id="prenom" placeholder="Prénom" required>
+      <input type="text" id="nom" placeholder="Nom" required>
+      <input type="email" id="signupEmail" placeholder="E-mail" required>
+      <input type="password" id="signupPassword" placeholder="Mot de passe" required>
+      <div class="g-recaptcha" data-sitekey="6LcVr0grAAAAAJqQcLExhaTUOpa-9_dT-CljhUSs"></div>
+      <button onclick="registerUser()">S'inscrire</button>
+      <div class="switch-link" onclick="switchToLogin()">J'ai déjà un compte</div>
+    </div>
+
+    <div class="auth-box" id="loginBox" style="display:none">
+      <h2>Connexion</h2>
+      <input type="email" id="loginEmail" placeholder="E-mail" required>
+      <input type="password" id="loginPassword" placeholder="Mot de passe" required>
+      <button onclick="loginUser()">Se connecter</button>
+      <div class="switch-link" onclick="switchToSignup()">Créer un compte</div>
+    </div>
+  </div>
+
+  <script>
+    // Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyCdJSSt92W9zT4HeECq9vV6NMW97ONTxcw",
+      authDomain: "lycee-be595.firebaseapp.com",
+      projectId: "lycee-be595",
+      storageBucket: "lycee-be595.firebasestorage.app",
+      messagingSenderId: "711125923660",
+      appId: "1:711125923660:web:86b20d9c10524f4fca81e9",
+      measurementId: "G-Z7CZ6P0JDT"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Switch between login/signup modals
+    function switchToLogin() {
+      document.getElementById('signupBox').style.display = 'none';
+      document.getElementById('loginBox').style.display = 'block';
+    }
+    function switchToSignup() {
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('signupBox').style.display = 'block';
+    }
+
+    // Register user
+    function registerUser() {
+      const email = document.getElementById("signupEmail").value;
+      const password = document.getElementById("signupPassword").value;
+      const recaptcha = grecaptcha.getResponse();
+      if (!recaptcha) return alert("Veuillez valider le reCAPTCHA.");
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(userCred => {
+          userCred.user.sendEmailVerification();
+          alert("Inscription réussie ! Vérifiez votre email avant de vous connecter.");
+        })
+        .catch(error => alert("Erreur : " + error.message));
+    }
+
+    // Login user
+    function loginUser() {
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+      auth.signInWithEmailAndPassword(email, password)
+        .then(userCred => {
+          if (!userCred.user.emailVerified) {
+            alert("Veuillez vérifier votre adresse email avant de continuer.");
+            auth.signOut();
+          }
+        })
+        .catch(error => alert("Erreur : " + error.message));
+    }
+
+    // Logout
+    function logout() {
+      auth.signOut();
+    }
+
+    // Auth state observer
+    auth.onAuthStateChanged(user => {
+      const overlay = document.getElementById("authOverlay");
+      const userBar = document.getElementById("userBar");
+      const userName = document.getElementById("userName");
+      if (user && user.emailVerified) {
+        overlay.style.display = "none";
+        userBar.style.display = "block";
+        userName.textContent = user.email.split('@')[0];
+      } else {
+        overlay.style.display = "flex";
+        userBar.style.display = "none";
+      }
+    });
+  </script>
       <script>
         // Dark mode toggle
         const themeToggle = document.getElementById('theme-toggle');
