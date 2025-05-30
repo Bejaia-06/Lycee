@@ -384,6 +384,7 @@ button:hover {
   </style>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
 <!-- Navigation -->
@@ -1354,6 +1355,7 @@ button:hover {
     <input type="text" id="nom" placeholder="Nom" required>
     <input type="email" id="email" placeholder="Email" required>
     <input type="password" id="password" placeholder="Mot de passe" required>
+    <div class="g-recaptcha" data-sitekey="6Lc3jFArAAAAAJnQlBIK4ujo4ycFo0E9J968McTU"></div>
     <button onclick="registerUser()">S'inscrire</button>
     <span class="toggle-link" onclick="toggleForms()">Déjà un compte ? Se connecter</span>
   </div>
@@ -1427,6 +1429,55 @@ button:hover {
         document.getElementById("welcomeBox").style.display = "none";
       }
     });
+
+auth.onAuthStateChanged(user => {
+  if (user) {
+    // Utilisateur connecté
+    document.getElementById("authOverlay").style.display = "none";
+    document.getElementById("welcomeBox").style.display = "block";
+    document.getElementById("userName").textContent = user.displayName || "Utilisateur";
+  } else {
+    // Pas connecté
+    document.getElementById("authOverlay").style.display = "flex";
+    document.getElementById("welcomeBox").style.display = "none";
+    // Rediriger ou bloquer l'accès ici si nécessaire
+  }
+});
+
+      if (!auth.currentUser) {
+  alert("Vous devez être connecté !");
+  window.location.reload();
+}
+
+      function registerUser() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const prenom = document.getElementById("prenom").value.trim();
+  const nom = document.getElementById("nom").value.trim();
+
+  if (!email || !password || !prenom || !nom) {
+    alert("Veuillez remplir tous les champs.");
+    return;
+  }
+
+  if (password.length < 6) {
+    alert("Le mot de passe doit contenir au moins 6 caractères.");
+    return;
+  }
+
+  auth.createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      return userCredential.user.updateProfile({ displayName: prenom });
+    })
+    .then(() => {
+      alert("Inscription réussie !");
+    })
+    .catch((error) => {
+      alert("Erreur : " + error.message);
+    });
+}
+
+      
   </script>
       <script>
         // Dark mode toggle
