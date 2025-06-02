@@ -1362,78 +1362,151 @@
     // Variables d'état
     let isAuthenticating = false;
 
+    // Fonction pour basculer entre les formulaires
     function toggleForms() {
       const reg = document.getElementById("registerForm");
       const log = document.getElementById("loginForm");
       reg.style.display = reg.style.display === "none" ? "block" : "none";
       log.style.display = log.style.display === "none" ? "block" : "none";
+      // Réinitialiser reCAPTCHA quand on change de formulaire
+      if (window.grecaptcha) grecaptcha.reset();
     }
 
+    // Fonction d'inscription améliorée
     async function registerUser() {
-      const email = document.getElementById("email").value;
+      const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
-      const prenom = document.getElementById("prenom").value;
-      const nom = document.getElementById("nom").value;
+      const prenom = document.getElementById("prenom").value.trim();
+      const nom = document.getElementById("nom").value.trim();
+      
+      // Validation des champs
+      if (!email || !password || !prenom || !nom) {
+        alert("Veuillez remplir tous les champs");
+        return;
+      }
+      
+      // Vérification du reCAPTCHA
+      if (window.grecaptcha && !grecaptcha.getResponse()) {
+        alert("Veuillez valider le reCAPTCHA");
+        return;
+      }
 
       isAuthenticating = true;
       document.getElementById("authOverlay").style.backdropFilter = "blur(5px)";
       
       try {
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-        await userCredential.user.updateProfile({ displayName: prenom });
+        await userCredential.user.updateProfile({ 
+          displayName: `${prenom} ${nom}` 
+        });
         
-        // Seulement après la complétion de toutes les opérations
-        document.getElementById("authOverlay").style.display = "none";
-        document.getElementById("welcomeBox").style.display = "block";
-        document.getElementById("userName").textContent = prenom;
+        // Reset et fermeture
+        resetAndCloseForms();
+        
       } catch (error) {
-        alert("Erreur : " + error.message);
+        handleAuthError(error, "inscription");
       } finally {
         isAuthenticating = false;
       }
     }
 
+    // Fonction de connexion améliorée
     async function loginUser() {
-      const email = document.getElementById("loginEmail").value;
+      const email = document.getElementById("loginEmail").value.trim();
       const password = document.getElementById("loginPassword").value;
+
+      if (!email || !password) {
+        alert("Veuillez remplir tous les champs");
+        return;
+      }
 
       isAuthenticating = true;
       document.getElementById("authOverlay").style.backdropFilter = "blur(5px)";
       
       try {
         await auth.signInWithEmailAndPassword(email, password);
-        // Le reste est géré par onAuthStateChanged
+        // La fermeture sera gérée par onAuthStateChanged
+        
       } catch (error) {
-        alert("Erreur : " + error.message);
+        handleAuthError(error, "connexion");
       } finally {
         isAuthenticating = false;
       }
     }
 
+    // Gestion centralisée des erreurs
+    function handleAuthError(error, context) {
+      let errorMessage = `Erreur de ${context}`;
+      
+      switch(error.code) {
+        case "auth/email-already-in-use":
+          errorMessage = "Cet email est déjà utilisé";
+          break;
+        case "auth/weak-password":
+          errorMessage = "Le mot de passe doit faire au moins 6 caractères";
+          break;
+        case "auth/invalid-email":
+          errorMessage = "Email invalide";
+          break;
+        case "auth/user-not-found":
+        case "auth/wrong-password":
+          errorMessage = "Email ou mot de passe incorrect";
+          break;
+        case "auth/too-many-requests":
+          errorMessage = "Trop de tentatives. Réessayez plus tard";
+          break;
+        case "auth/network-request-failed":
+          errorMessage = "Problème de connexion. Vérifiez votre internet";
+          break;
+      }
+      
+      alert(errorMessage);
+      if (window.grecaptcha) grecaptcha.reset();
+    }
+
+    // Réinitialisation et fermeture des formulaires
+    function resetAndCloseForms() {
+      document.getElementById("registerForm").reset();
+      document.getElementById("loginForm").reset();
+      if (window.grecaptcha) grecaptcha.reset();
+      
+      document.getElementById("authOverlay").style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+
+    // Gestion de l'état d'authentification
     auth.onAuthStateChanged(user => {
-      if (user && !isAuthenticating) {
-        // Vérification supplémentaire pour s'assurer que l'utilisateur est bien authentifié
+      if (user) {
         auth.currentUser.getIdToken().then(() => {
           document.getElementById("authOverlay").style.display = "none";
+          document.body.style.overflow = "auto";
           document.getElementById("welcomeBox").style.display = "block";
-          document.getElementById("userName").textContent = user.displayName || "Utilisateur";
+          const displayName = user.displayName || "Utilisateur";
+          document.getElementById("userName").textContent = displayName.split(' ')[0]; // Affiche seulement le prénom
         }).catch(() => {
-          // Si le token n'est pas valide, on garde l'overlay
           document.getElementById("authOverlay").style.display = "flex";
           document.getElementById("welcomeBox").style.display = "none";
         });
       } else if (!isAuthenticating) {
         document.getElementById("authOverlay").style.display = "flex";
+        document.body.style.overflow = "hidden";
         document.getElementById("welcomeBox").style.display = "none";
       }
     });
 
-    // Empêcher la fermeture accidentelle de l'overlay
+    // Empêcher la fermeture accidentelle
     document.getElementById("authOverlay").addEventListener("click", (e) => {
       if (e.target === document.getElementById("authOverlay")) {
         e.preventDefault();
         e.stopPropagation();
       }
+    });
+
+    // Initialisation au chargement
+    document.addEventListener('DOMContentLoaded', () => {
+      // Afficher le bon formulaire par défaut
+      document.getElementById("registerForm").style.display = "block";
+      document.getElementById("loginForm").style.display = "none";
     });
 </script>
       <script>
