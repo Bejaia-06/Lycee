@@ -356,6 +356,7 @@
   </style>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
 <!-- Navigation -->
@@ -414,7 +415,6 @@
             </div>
         </div>
     </nav>
-  <div id="welcomeBox" class="welcome-box" style="display: none;">Bonjour <span id="userName"></span> !</div>
     <!-- Hero Section -->
 <section id="home" class="min-h-screen flex items-center justify-center text-white pt-20" style="background-image: url('lycee.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="container mx-auto px-4 text-center">
@@ -1332,6 +1332,7 @@
       <input type="text" id="nom" placeholder="Nom" required>
       <input type="email" id="email" placeholder="Email" required>
       <input type="password" id="password" placeholder="Mot de passe" required>
+      <div class="g-recaptcha" data-sitekey="6Lf8QlMrAAAAAP3AXs_Vy99NaOQglxND4w-ltiyr"></div>
       <button onclick="registerUser()">S'inscrire</button>
       <span class="toggle-link" onclick="toggleForms()">Déjà un compte ? Se connecter</span>
     </div>
@@ -1343,7 +1344,7 @@
       <span class="toggle-link" onclick="toggleForms()">Pas encore de compte ? S'inscrire</span>
     </div>
   </div>
-  <script>
+<script>
     const firebaseConfig = {
       apiKey: "AIzaSyCdJSSt92W9zT4HeECq9vV6NMW97ONTxcw",
       authDomain: "lycee-be595.firebaseapp.com",
@@ -1353,8 +1354,13 @@
       appId: "1:711125923660:web:86b20d9c10524f4fca81e9",
       measurementId: "G-Z7CZ6P0JDT"
     };
+    
+    // Initialisation Firebase
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
+    
+    // Variables d'état
+    let isAuthenticating = false;
 
     function toggleForms() {
       const reg = document.getElementById("registerForm");
@@ -1363,48 +1369,73 @@
       log.style.display = log.style.display === "none" ? "block" : "none";
     }
 
-    function registerUser() {
+    async function registerUser() {
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
       const prenom = document.getElementById("prenom").value;
       const nom = document.getElementById("nom").value;
 
-      auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          return userCredential.user.updateProfile({ displayName: prenom });
-        })
-        .then(() => {
-          alert("Inscription réussie !");
-        })
-        .catch((error) => {
-          alert("Erreur : " + error.message);
-        });
+      isAuthenticating = true;
+      document.getElementById("authOverlay").style.backdropFilter = "blur(5px)";
+      
+      try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        await userCredential.user.updateProfile({ displayName: prenom });
+        
+        // Seulement après la complétion de toutes les opérations
+        document.getElementById("authOverlay").style.display = "none";
+        document.getElementById("welcomeBox").style.display = "block";
+        document.getElementById("userName").textContent = prenom;
+      } catch (error) {
+        alert("Erreur : " + error.message);
+      } finally {
+        isAuthenticating = false;
+      }
     }
 
-    function loginUser() {
+    async function loginUser() {
       const email = document.getElementById("loginEmail").value;
       const password = document.getElementById("loginPassword").value;
 
-      auth.signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          document.getElementById("authOverlay").style.display = "none";
-        })
-        .catch((error) => {
-          alert("Erreur : " + error.message);
-        });
+      isAuthenticating = true;
+      document.getElementById("authOverlay").style.backdropFilter = "blur(5px)";
+      
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        // Le reste est géré par onAuthStateChanged
+      } catch (error) {
+        alert("Erreur : " + error.message);
+      } finally {
+        isAuthenticating = false;
+      }
     }
 
     auth.onAuthStateChanged(user => {
-      if (user) {
-        document.getElementById("authOverlay").style.display = "none";
-        document.getElementById("welcomeBox").style.display = "block";
-        document.getElementById("userName").textContent = user.displayName || "Utilisateur";
-      } else {
+      if (user && !isAuthenticating) {
+        // Vérification supplémentaire pour s'assurer que l'utilisateur est bien authentifié
+        auth.currentUser.getIdToken().then(() => {
+          document.getElementById("authOverlay").style.display = "none";
+          document.getElementById("welcomeBox").style.display = "block";
+          document.getElementById("userName").textContent = user.displayName || "Utilisateur";
+        }).catch(() => {
+          // Si le token n'est pas valide, on garde l'overlay
+          document.getElementById("authOverlay").style.display = "flex";
+          document.getElementById("welcomeBox").style.display = "none";
+        });
+      } else if (!isAuthenticating) {
         document.getElementById("authOverlay").style.display = "flex";
         document.getElementById("welcomeBox").style.display = "none";
       }
     });
-  </script>
+
+    // Empêcher la fermeture accidentelle de l'overlay
+    document.getElementById("authOverlay").addEventListener("click", (e) => {
+      if (e.target === document.getElementById("authOverlay")) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+</script>
       <script>
         // Dark mode toggle
         const themeToggle = document.getElementById('theme-toggle');
