@@ -4,9 +4,358 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lycée Sidi Ali-Lebhar - Béjaïa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style src="style.css"></style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .hero-image {
+            background-image: linear-gradient(rgba(2, 132, 199, 0.7), rgba(6, 95, 150, 0.7)), url('lycee.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .back-to-top {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .card-hover:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .theme-toggle {
+            transition: transform 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+        
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+        
+        /* Styles pour le tableau des professeurs */
+        .teachers-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
 
+        .teachers-table thead {
+            background-color: #f4f4f4;
+        }
+
+        .teachers-table th, 
+        .teachers-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .teachers-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .teachers-table th {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .teachers-table tbody tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+
+        .teachers-table tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        /* Dark mode pour le tableau */
+        body.dark .teachers-table thead {
+            background-color: #1a365d;
+        }
+
+        body.dark .teachers-table th,
+        body.dark .teachers-table td {
+            background-color: #0a192f;
+            color: #e0e0e0;
+            border-color: #1e2a3a;
+        }
+
+        body.dark .teachers-table tr:hover {
+            background-color: #112240;
+        }
+
+        body.dark .teachers-table tbody tr:nth-child(even) {
+            background-color: #0f172a;
+        }
+
+        body.dark .teachers-table tbody tr:nth-child(odd) {
+            background-color: #0a192f;
+        }
+
+        /* Style responsive pour mobile */
+        @media (max-width: 768px) {
+            .teachers-table, 
+            .teachers-table thead, 
+            .teachers-table tbody, 
+            .teachers-table th, 
+            .teachers-table td, 
+            .teachers-table tr {
+                display: block;
+            }
+
+            .teachers-table tr {
+                margin-bottom: 1rem;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+                border-radius: 5px;
+                overflow: hidden;
+            }
+
+            .teachers-table th {
+                display: none;
+            }
+
+            .teachers-table td {
+                position: relative;
+                padding-left: 50%;
+            }
+
+            .teachers-table td::before {
+                position: absolute;
+                left: 15px;
+                top: 12px;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+
+            .teachers-table td:nth-of-type(1)::before { content: "Nom & Prénom"; }
+            .teachers-table td:nth-of-type(2)::before { content: "Matière"; }
+            .teachers-table td:nth-of-type(3)::before { content: "Jour de réception"; }
+            .teachers-table td:nth-of-type(4)::before { content: "Heure"; }
+        }
+        
+        /* Style pour la barre de recherche */
+        .search-box {
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+        }
+
+        body.dark .search-box {
+            background-color: #1e293b;
+            border-color: #334155;
+            color: #e0e0e0;
+        }
+
+        body.dark .search-box::placeholder {
+            color: #94a3b8;
+        }
+
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .welcome-box {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+    .content {
+      padding: 2rem;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(5px);
+      background: rgba(255,255,255,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    .form-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 100%;
+    }
+    .form-container h2 {
+      margin-top: 0;
+      color: #007bff;
+    }
+    input {
+      width: 100%;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .toggle-link {
+      color: #007bff;
+      cursor: pointer;
+      display: block;
+      text-align: center;
+      margin-top: 1rem;
+    }
+  </style>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 </head>
 <body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100">
 <!-- Navigation -->
@@ -994,6 +1343,200 @@
       <span class="toggle-link" onclick="toggleForms()">Pas encore de compte ? S'inscrire</span>
     </div>
   </div>
-    <script src="script.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCdJSSt92W9zT4HeECq9vV6NMW97ONTxcw",
+      authDomain: "lycee-be595.firebaseapp.com",
+      projectId: "lycee-be595",
+      storageBucket: "lycee-be595.appspot.com",
+      messagingSenderId: "711125923660",
+      appId: "1:711125923660:web:86b20d9c10524f4fca81e9",
+      measurementId: "G-Z7CZ6P0JDT"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function toggleForms() {
+      const reg = document.getElementById("registerForm");
+      const log = document.getElementById("loginForm");
+      reg.style.display = reg.style.display === "none" ? "block" : "none";
+      log.style.display = log.style.display === "none" ? "block" : "none";
+    }
+
+    function registerUser() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const prenom = document.getElementById("prenom").value;
+      const nom = document.getElementById("nom").value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          return userCredential.user.updateProfile({ displayName: prenom });
+        })
+        .then(() => {
+          alert("Inscription réussie !");
+        })
+        .catch((error) => {
+          alert("Erreur : " + error.message);
+        });
+    }
+
+    function loginUser() {
+      const email = document.getElementById("loginEmail").value;
+      const password = document.getElementById("loginPassword").value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          document.getElementById("authOverlay").style.display = "none";
+        })
+        .catch((error) => {
+          alert("Erreur : " + error.message);
+        });
+    }
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        document.getElementById("authOverlay").style.display = "none";
+        document.getElementById("welcomeBox").style.display = "block";
+        document.getElementById("userName").textContent = user.displayName || "Utilisateur";
+      } else {
+        document.getElementById("authOverlay").style.display = "flex";
+        document.getElementById("welcomeBox").style.display = "none";
+      }
+    });
+  </script>
+      <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        
+        function toggleTheme() {
+            if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        }
+        
+        themeToggle.addEventListener('click', toggleTheme);
+        themeToggleMobile.addEventListener('click', toggleTheme);
+        
+        // Set initial theme based on localStorage or preference
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            const isOpen = mobileMenu.classList.contains('open');
+            mobileMenuButton.setAttribute('aria-expanded', isOpen);
+            mobileMenuButton.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+                mobileMenuButton.setAttribute('aria-label', 'Open menu');
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (mobileMenu.classList.contains('open')) {
+                        mobileMenu.classList.remove('open');
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                        mobileMenuButton.setAttribute('aria-label', 'Open menu');
+                    }
+                }
+            });
+        });
+
+        // Système de recherche pour les professeurs
+        document.getElementById('teacherSearch').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#teachersTable tbody tr');
+            
+            rows.forEach(row => {
+                const name = row.cells[0].textContent.toLowerCase();
+                const subject = row.cells[1].textContent.toLowerCase();
+                const day = row.cells[2].textContent.toLowerCase();
+                const time = row.cells[3].textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || 
+                    subject.includes(searchTerm) || 
+                    day.includes(searchTerm) || 
+                    time.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Animation on scroll
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+        
+        function checkScroll() {
+            animateElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+        
+        // Set delay for each animated element
+        animateElements.forEach((element, index) => {
+            const delay = element.dataset.delay || 0;
+            element.style.transitionDelay = `${delay}ms`;
+        });
+    </script>
 </body>
 </html>
