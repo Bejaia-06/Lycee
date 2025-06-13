@@ -6,6 +6,7 @@
     <title>ثانوية سيدي علي البحر - بجاية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -63,7 +64,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
         
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Tajawal', sans-serif;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         
@@ -374,7 +375,7 @@ body.dark .teachers-table tr:hover {
                 </div>
                 
                 <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
+               <div class="hidden md:flex items-center space-x-8 space-x-reverse">
                     <a href="#home" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">الرئيسية</a>
                     <a href="#about" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">عن المدرسة</a>
                     <a href="#programs" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">البرامج الأكاديمية</a>
@@ -387,7 +388,7 @@ body.dark .teachers-table tr:hover {
                         <i class="fas fa-moon dark:hidden"></i>
                         <i class="fas fa-sun hidden dark:inline"></i>
                     </button>
-                </div>
+               </div>
                 
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
@@ -414,7 +415,6 @@ body.dark .teachers-table tr:hover {
                             <i class="fas fa-sun hidden dark:inline"></i>
                         </button>
                     </div>
-                </div>
             </div>
         </div>
     </nav>
